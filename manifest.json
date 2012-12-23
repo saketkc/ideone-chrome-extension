@@ -1,0 +1,41 @@
+{
+  "name": "IdeOne For Browser",
+"version": "0.1.0",
+"manifest_version": 2,
+"description": "IdeOne For Browser",
+  "browser_action": {
+"default_icon":"images/icon-128.png",
+"default_title": "IdeOne For Browser",
+"default_popup":"popup.html"
+},
+"icons":{
+"16": "images/icon-16.png",
+"48": "images/icon-48.png",
+"128": "images/icon-128.png"
+
+
+},
+
+   "background": {
+ 
+     "page":"background.html"
+     
+       },
+
+  "content_scripts": [
+    {
+		"matches": ["<all_urls>"],
+      "js": ["js/jquery-1.3.2.min.js","js/jquery.fancybox-1.3.4.pack.js","js/codemirror.js","js/clike.js","js/myscript.js"],
+      "css": ["css/jquery.fancybox-1.3.4.css","css/codemirror.css"]
+      
+    }
+  ],
+  "web_accessible_resources": ["images/fancybox.png","images/blank.gif","images/spinner.gif"],
+  
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+	"contextMenus",
+	"tabs"
+  ]
+}
