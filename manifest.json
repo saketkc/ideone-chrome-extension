@@ -1,11 +1,11 @@
 {
-  "name": "IdeOne For Browser",
+  "name": "IdeLab For Chrome",
 "version": "0.1.0",
 "manifest_version": 2,
-"description": "IdeOne For Browser",
+"description": "IdeLab For Chrome",
   "browser_action": {
 "default_icon":"images/icon-128.png",
-"default_title": "IdeOne For Browser",
+"default_title": "IdeLab For Chrome",
 "default_popup":"popup.html"
 },
 "icons":{

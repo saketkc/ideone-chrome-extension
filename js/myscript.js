@@ -185,7 +185,7 @@ $("#scilab-run-code").live("click",function(){
 	$("#scilab-run-code").html("<img src=\""+imgUrl+"\"> Running.....");
 	
 	var scilabinput = scilabeditor.getValue();//$("#scilab-code").val();
-	alert(scilabinput);
+	//alert(scilabinput);
 	$.post(
       
       "http://scilab-test.garudaindia.in/cloud/scilab_evaluate",
@@ -194,7 +194,7 @@ $("#scilab-run-code").live("click",function(){
     function( msg ){
 		
 		$("#scilab-run-code").html("Run");
-		alert(JSON.parse(msg).output)
+		//alert(JSON.parse(msg).output)
 		var content = "<br/><hr/><h3>Results:<br/> </h3>"+ "<textarea id=\"code-output\">"+JSON.parse(msg).output+"</textarea>";
 	    $("#scilab-output").html(content);
 	    var editorout = CodeMirror.fromTextArea(document.getElementById("code-output"), {
@@ -292,7 +292,7 @@ $("#run-code").live("click",function(){
 			
 			all_languages_option = "<select name=\"lang\" id=\"lang\">";
 			for(i=0;i<language_order.length;i++){
-				all_languages_option+="<option value=\""+language_order[i]+"\">"+language_order[i]+"</option>";
+				all_languages_option+="<option value=\""+language_order[i]+"\">"+languages.language_order[i].display+"</option>";
 				
 			}
 			all_languages_option+="</select>";
