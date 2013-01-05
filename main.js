@@ -205,11 +205,17 @@ $("#run-code").click(function(){
 		$.ajax({
 			type: "POST",
 			url: "http://scilab-test.garudaindia.in/cloud/scilab_evaluate",
-			data: { scilab_code: editorin.getValue(),graphicsmode:'',external_user:'guest' },
+			data: { scilab_code: editorin.getValue(),graphicsmode:1,external_user:'guest' },
                         
 			}).done(function( msg ) {
 				$("#run-code").html("Run")
 				editorout.setValue(msg["output"]);
+				if (msg["graph"]!="")
+				{
+					//alert("graph");
+					content = "<img src=\""+"http://scilab-test.garudaindia.in/cloud/graphs/3/"+"/"+msg["graph"]+".png"+"\">"
+					$("#scilab-graph").html(content);
+				}
 				});
 		}
 	else{

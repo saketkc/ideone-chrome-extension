@@ -189,13 +189,19 @@ $("#scilab-run-code").live("click",function(){
 	$.post(
       
       "http://scilab-test.garudaindia.in/cloud/scilab_evaluate",
-      { scilab_code:scilabinput,graphicsmode:'',external_user:'guest' },
+      { scilab_code:scilabinput,graphicsmode:1,external_user:'guest' },
       
     function( msg ){
 		
 		$("#scilab-run-code").html("Run");
 		//alert(JSON.parse(msg).output)
+		//content = "<img src=\""+"http://scilab-test.garudaindia.in/cloud/graphs/3/"+"/"+msg["graph"]+".png"+"\">"
+		
 		var content = "<br/><hr/><h3>Results:<br/> </h3>"+ "<textarea id=\"code-output\">"+JSON.parse(msg).output+"</textarea>";
+		if (JSON.parse(msg).graph!=""){
+			content += "<img src=\""+"http://scilab-test.garudaindia.in/cloud/graphs/3/"+JSON.parse(msg).graph+".png"+"\">"
+		}
+		console.log(msg);
 	    $("#scilab-output").html(content);
 	    var editorout = CodeMirror.fromTextArea(document.getElementById("code-output"), {
 					lineNumbers: true			
@@ -275,7 +281,7 @@ $("#run-code").live("click",function(){
 			
 			
 			inputdata = request.data;
-			content = "<h3>Input</h3><br/>"+"<br><div id=\"codeblock\"><textarea id=\"scilab-code\">"+inputdata+"</textarea><br/><button id='scilab-run-code'>Run </button> </div><div id=\"scilab-output\"></div>";			
+			content = "<h3>Input</h3><br/>"+"<br><div id=\"codeblock\"><textarea id=\"scilab-code\">"+inputdata+"</textarea><br/><button id='scilab-run-code'>Run </button> </div><div id=\"scilab-output\"></div><div id=\"scilab-graph\"></div>";			
 			$("#scilab-on-cloud-data").html(content);
 			scilabeditor = CodeMirror.fromTextArea(document.getElementById("scilab-code"), {
 				lineNumbers: true,
@@ -291,13 +297,17 @@ $("#run-code").live("click",function(){
 		{
 			
 			all_languages_option = "<select name=\"lang\" id=\"lang\">";
+			//console.log(language_order[0]);
+			
+			//console.log(languages.language_order[0].display);
 			for(i=0;i<language_order.length;i++){
-				all_languages_option+="<option value=\""+language_order[i]+"\">"+languages.language_order[i].display+"</option>";
+				all_languages_option+="<option value=\""+language_order[i]+"\">"+language_order[i]+"</option>";
 				
 			}
+			
 			all_languages_option+="</select>";
 			inputdata = request.data;
-			data = request.data.replace(/\n/g, "<br />").replace(/\t/g,"&nbsp&nbsp").replace(/\r/g,"&nbsp&nbsp")
+			//data = request.data.replace(/\n/g, "<br />").replace(/\t/g,"&nbsp&nbsp").replace(/\r/g,"&nbsp&nbsp")
 			content = "<h3>Input</h3><br/>"+all_languages_option+"<br><div id=\"codeblock\"><textarea id=\"code\">"+inputdata+"</textarea><br/><button id='run-code'>Run </button> </div><div id=\"normal-code-output\"></div>";			
 			$("#scilab-on-cloud-data").html(content);
 			normaleditor = CodeMirror.fromTextArea(document.getElementById("code"), {

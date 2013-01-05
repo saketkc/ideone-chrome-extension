@@ -1,11 +1,11 @@
 /* BASICS */
 html {
-height :300px;
-width: 200px;
+height :500px;
+width: 500px;
 }
 body{
-height :300px;
-width: 200px;
+height :500px;
+width: 500px;
 }
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
