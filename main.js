@@ -1,11 +1,11 @@
 $(document).ready(function(){
 	var editorout = CodeMirror.fromTextArea(document.getElementById("output"), {
-					lineNumbers: true			
+					lineNumbers: true
 	});
 	var editorin = CodeMirror.fromTextArea(document.getElementById("input"), {
-					lineNumbers: true			
+					lineNumbers: true
 	});
-	
+
 	var languages = {
     'c': {
         value: '11',
@@ -150,6 +150,7 @@ var language_order = [
   'js',
 ];
 function onload(){
+    console.log("ONLOAD!")
 		tmp = document.createElement('div'),
 		tmp.innerHTML = request.responseText;
 		console.log(request.responseText);
@@ -189,7 +190,7 @@ function checkStatus(linkEl){
 	$("#run-code").html("Run");
 	$("#code-out").html("<h3>Output</h3><hr/>Link: <a href=\""+link+"\">"+link+"</a><br/>");
 	editorout.setValue(result);
-	
+
 	}
 var all_languages_option = "<select name=\"lang\" id=\"lang\">";
 for(i=0;i<language_order.length;i++){
@@ -206,7 +207,7 @@ $("#run-code").click(function(){
 			type: "POST",
 			url: "http://scilab-test.garudaindia.in/cloud/scilab_evaluate",
 			data: { scilab_code: editorin.getValue(),graphicsmode:1,external_user:'guest' },
-                        
+
 			}).done(function( msg ) {
 				$("#run-code").html("Run")
 				editorout.setValue(msg["output"]);
@@ -219,9 +220,10 @@ $("#run-code").click(function(){
 				});
 		}
 	else{
+        alert("DDDDD")
 		$("#run-code").html("<img src=\"images/spinner.gif\">Running....");
-		request = new XMLHttpRequest();       
-        request.onload = onload;       
+		request = new XMLHttpRequest();
+        request.onload = onload;
         request.open("POST", "http://ideone.com/ideone/Index/submit/", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
